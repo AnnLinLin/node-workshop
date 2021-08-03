@@ -1,5 +1,32 @@
 # Node.js
 
+## 什麼是 Process?
+
+![](https://image.slidesharecdn.com/20110824-141028214106-conversion-gate02/95/-7-638.jpg?cb=1414551422)
+![](https://image.slidesharecdn.com/20110824-141028214106-conversion-gate02/95/-15-638.jpg?cb=1414551422)
+
+當程式載入記憶體時，會建立 Process  
+開著很久的頁面會偷偷搬回硬碟中，因此開啟時較慢
+
+**CPU:** 功能主要是解釋電腦指令以及處理電腦軟體中的資料(真正在計算)。  
+**暫存器（Register）:** 是中央處理器內用來暫存指令、數據和位址的電腦記憶體。暫存器的存貯容量有限，讀寫速度非常快。在電腦架構裡，暫存器儲存在已知時間點所作計算的中間結果，通過快速地存取資料來加速電腦程式的執行。
+<br>
+<br>
+
+- **Starvation 飢餓:**
+  Process 因為長期無法取得完工所需的全部資源,以致形成 indefinite blocking 之現象。
+  解法:Aging Tech 等...
+- **Context Switching:**
+  若 CPU 將執行中的 Process 切換給其他 Process 使用時,必須保存目前執行中 Process 的狀態,並載入欲執行 Process 的狀態資訊。
+  解法 1:提供多套 Registers
+  解法 2:改用 Thread
+  **Thread:** Light weight process. 是 CPU 分配資源的最小單位,而同一個 Process 內的 threads 共享 code section, data section, 跟一些 OS 資源。
+- **Deadlock:**
+  系統中存在一組 Processes,彼此形成 circular waiting 的情況,使得 Processes 皆無法繼續往下執行,導致 CPU 利用度及產能急速下降。
+- **Race Condition:**
+  在 Share Memory 溝通方式下,共享變數的值會因為 Processes 執行的順序不同而有所不同。
+  解法:保證同一時間只有一個 Process 在存取共享變數。
+
 ## 什麼是 Node.js?
 
 Node.js 是能夠在伺服器端運行 JavaScript 的開放原始碼、跨平台 JavaScript 執行環境。Node.js 採用 Google 開發的 V8 執行程式碼，使用事件驅動、非阻塞和非同步輸入輸出模型等技術來提高效能，可最佳化應用程式的傳輸量和規模。這些技術通常用於資料密集的即時應用程式。
