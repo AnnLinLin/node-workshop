@@ -5,6 +5,8 @@
 ![](https://image.slidesharecdn.com/20110824-141028214106-conversion-gate02/95/-7-638.jpg?cb=1414551422)
 ![](https://image.slidesharecdn.com/20110824-141028214106-conversion-gate02/95/-15-638.jpg?cb=1414551422)
 
+參考資料: https://www.slideshare.net/azole/20110824-40848849
+
 當程式載入記憶體時，會建立 Process  
 開著很久的頁面會偷偷搬回硬碟中，因此開啟時較慢
 
@@ -48,6 +50,8 @@ Call Stack 則會紀錄我們目前程式跑到什麼位置，如果執行了一
 ## 事件循環 (Event Loop)、事件佇列 (Event Queue)、事件堆疊 (Call Stack)
 
 ![](https://miro.medium.com/max/2000/1*zTt9eHCCktSbKLo9HQd1dw.gif)
+
+參考資料: https://medium.com/itsems-frontend/javascript-event-loop-event-queue-call-stack-74a02fed5625
 
 - **Stack：**
   程式中要執行的函式堆進來 (pop in) 的地方，一次執行一個，完成後便跳出 (pop out)，為後進先出(LIFO)。
