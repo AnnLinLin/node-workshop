@@ -6,6 +6,12 @@ Promise 用來改善 JavaScript **非同步**的語法結構。
 JavaScript 是屬於同步的程式語言，因此一次僅能做一件事情，但遇到非同步的事件時，就會將非同步的事件移動到程式碼的最後方，等到所有的原始碼運行完以後才會執行非同步的事件。
 
 Promise 本身是一個**建構**函式，函式也是屬於**物件**的一種，因此可以附加其它屬性方法在上。
+Promise 是一個表示**非同步**運算的**最終完成**或**失敗**的**物件**。
+
+- 非同步
+- 物件 --> new Promise()
+- 最終完成
+- 最終失敗
 
 Promise 建構函式建立同時，必須傳入一個函式作為參數（executor function），此函式的參數包含 **resolve**, **reject** （resolve 及 reject 的名稱可以自定義），這兩個方法分別代表成功與失敗的回傳結果，特別注意這兩個僅能回傳其中之一，回傳後表示此 Promise 事件結束。
 
@@ -37,6 +43,43 @@ const p = new Promise();
 p.then();    // Promise 回傳正確
 p.catch();   // Promise 回傳失敗
 p.finally(); // 非同步執行完畢（無論是否正確完成）
+```
+
+## chain
+
+Promise 另一個特點在於 **then、catch** 都可以使用鏈接的方式不斷的進行下一個任務，在此範例中我們修改 Promise 的結果，改成傳入 0 則會調用 reject，其它數值則會調用 resolve。
+
+```javascript=
+function promise(num) {
+  return new Promise((resolve, reject) => {
+    num ? resolve(`${num}, 成功`) : reject('失敗');
+  });
+}
+```
+
+當我們要進行確保 Promise 任務結束後在進行下一個任務時，就可以使用 **return** 的方式進入下一個 then，此 return 也有以下特點：
+
+- 方法不限於 promise 函式，任何表達式（expression）都可進行回傳
+- 如果是 promise 函式，則會繼續遵循 then 及 catch 的運作
+- 如果不是 promise 函式，在下一個 then 則可以取得結果
+
+```javascript=
+promise(1)
+  .then(success => {
+    console.log(success);
+    return promise(2);
+  })
+  .then(success => {
+    console.log(success);
+    return promise(0); // 這個階段會進入 catch
+  })
+  .then(success => {   // 由於上一個階段結果是 reject，所以此段不執行
+    console.log(success);
+    return promise(3);
+  })
+  .catch(fail => {
+    console.log(fail);
+  })
 ```
 
 資料來源 : https://wcc723.github.io/development/2020/02/16/all-new-promise/
