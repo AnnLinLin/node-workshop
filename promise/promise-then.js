@@ -30,7 +30,6 @@ job1
   })
   .then((result) => {
     console.log("third", result);
-    return doWork("寫作業", 5000, true);
   })
   .catch((error) => {
     // 捕捉catch前面所有錯誤
