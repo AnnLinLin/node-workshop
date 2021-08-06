@@ -20,7 +20,7 @@ console.log(`開始工作 at ${dt.toISOString()}`);
 
 //await 一定要在 async 的函式裡面用
 async function doAllWorks() {
-  let job1 = await doWork("刷牙", 3000, false);
+  let job1 = await doWork("刷牙", 3000, true);
   console.log(job1);
   let job2 = await doWork("吃早餐", 4000, true);
   console.log(job2);
