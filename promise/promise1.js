@@ -1,4 +1,7 @@
 let doWork = function (job, timer, isOK) {
+  // 物件： new Promise();
+  // 建構式一定要傳入一個函式，而且這個函式本身會有兩個參數
+  // resolve, reject
   return new Promise((resolve, reject) => {
     console.log("in promise");
     setTimeout(() => {
