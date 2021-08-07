@@ -19,11 +19,11 @@ fs.readFile("stock.txt", "utf8", (err, stockCode) => {
         params: {
           response: "json",
           date: moment().format("YYYYMMDD"),
-          stockNo: "2330",
+          stockNo: stockCode,
         },
       })
       .then((response) => {
-        console.log(response.data);
-      });
+        console.log(response.data.title);
+      })
   }
 });
