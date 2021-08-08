@@ -8,7 +8,8 @@ async function doWork() {
       if (err) {
         reject(err);
       } else {
-        resolve(stockCode);
+        //trim 移除前後空白,包括換行
+        resolve(stockCode.trim());
       }
     });
   });
