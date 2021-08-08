@@ -12,20 +12,21 @@ async function doWork() {
       }
     });
   });
-  let response = await axios.get(
-    "https://www.twse.com.tw/exchangeReport/STOCK_DAY",
-    {
-      params: {
-        response: "json",
-        date: moment().format("YYYYMMDD"),
-        stockNo: stockCode,
-      },
-    }
-  );
-  console.log(response.data.title);
+  try {
+    let response = await axios.get(
+      "https://www.twse.com.tw/exchangeReport/STOCK_DAY",
+      {
+        params: {
+          response: "json",
+          date: moment().format("YYYYMMDD"),
+          stockNo: stockCode,
+        },
+      }
+    );
+    console.log(response.data.title);
+  } catch (e) {
+    console.error(e);
+  }
 }
-try {
-  doWork();
-} catch (e) {
-  console.error(e);
-}
+
+doWork();
