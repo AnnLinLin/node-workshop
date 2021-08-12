@@ -4,7 +4,6 @@ const fs = require("fs");
 const mysql = require("mysql");
 require("dotenv").config();
 
-const a = 1;
 
 const connection = mysql.createConnection({
   host: process.env.DB_HOST,
@@ -26,7 +25,6 @@ connection.connect((err) => {
 // 4.抓回來的資料存到資料庫的 stock_price 表格裡去
 
 // 讀 stock.txt 把股票代碼讀進來
-
 function readStockcodePromise() {
   return new Promise((resolve, reject) => {
     fs.readFile("stock.txt", "utf8", (err, stockCode) => {
@@ -41,7 +39,6 @@ function readStockcodePromise() {
 }
 
 // 去證交所抓資料
-
 function catchTwseStockDataPromise(stockCode) {
   return axios.get("https://www.twse.com.tw/exchangeReport/STOCK_DAY", {
     params: {
@@ -53,7 +50,6 @@ function catchTwseStockDataPromise(stockCode) {
 }
 
 // 去資料庫的 stock 表格查看看，這個代碼是不是在我們的服務範圍內
-
 function checkDbStockCodePromise(stockCode) {
   return new Promise((resolve, reject) => {
     connection.query(
@@ -72,7 +68,6 @@ function checkDbStockCodePromise(stockCode) {
 }
 
 // 抓回來的資料存到資料庫的 stock_price 表格裡去
-
 function insertStockPricePromise(parseData) {
   return new Promise((resolve, reject) => {
     // INSERT IGNORE INTO避免重複插入記錄,當有重複記錄會忽略
@@ -104,14 +99,14 @@ async function doWork() {
     console.info("有查到資料");
     //3.如果是，才去證交所抓資料
     let response = await catchTwseStockDataPromise(stockCode);
-    // 4.抓回來的資料存到資料庫的 stock_price 表格裡去
+    //4.抓回來的資料存到資料庫的 stock_price 表格裡去
     const twseData = response.data;
     //確認證交所查到的資料是否有問題
     if (twseData.stat !== "OK") {
       throw "從證交所查到的資料有問題";
     }
     //console.log(twseData);
-    //千分號
+    //處理千分號
     //處理日期
     let parseData = twseData.data.map((item) => {
       item = item.map((value) => {
