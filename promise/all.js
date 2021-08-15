@@ -15,7 +15,7 @@ let doWorkPromise = function (job,isOK) {
 // let dt = new Date();
 // console.log(`開始工作 at ${dt.toISOString()}`);
 
-// //await 一定要在 async 的函式裡面用
+// await 一定要在 async 的函式裡面用
 
 let job1Promise = doWorkPromise("刷牙", true);
 let job2Promise = doWorkPromise("吃早餐", true);
